@@ -16,6 +16,12 @@
         <DataTemplate DataType="{x:Type viewModel:FormularioViewModel}">
             <local:FormularioView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:FugaDetailViewModel}">
+            <local:FugaDetailView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RegistroViewModel}">
+            <local:RegistroView />
+        </DataTemplate>
     </Window.Resources>
 
     <Grid Margin="10">
@@ -29,6 +35,9 @@
 
         <StackPanel Grid.Column="0">
             <Label>Menu Mamalon</Label>
+            <Button Command="{Binding ShowFormularioViewCommand}">Registro Nuevo</Button>
+            <Button Command="{Binding ShowFugaDetailViewCommand}">Boton de prueba</Button>
+            <Button Command="{Binding ShowTablaDeRegistroViewCommand}">Tabla de Registros</Button>
         </StackPanel>
 
         <ContentControl Content="{Binding CurrentChildView}"

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace codename_boquete.ViewModel
@@ -28,12 +29,16 @@ namespace codename_boquete.ViewModel
         }
         // Comandos mamalones
         public ICommand ShowFormularioViewCommand { get; }
+        public ICommand ShowFugaDetailViewCommand { get; }
+        public ICommand ShowTablaDeRegistroViewCommand { get; }
 
         // Constructor
         public MainViewModel()
         {
             // Inicializamos los comandos para mostrar las vistas
             ShowFormularioViewCommand = new ViewModelCommand(ExecuteShowFormularioViewCommand);
+            ShowFugaDetailViewCommand = new ViewModelCommand(ExecuteShowFugaDetailViewCommand);
+            ShowTablaDeRegistroViewCommand = new ViewModelCommand(ExecuteShowTablaDeRegistroViewCommand);
 
             // View por Defecto
             ExecuteShowFormularioViewCommand(null);
@@ -47,5 +52,16 @@ namespace codename_boquete.ViewModel
             CurrentChildView = new FormularioViewModel();
 
         }
+
+        public void ExecuteShowFugaDetailViewCommand(object obj)
+        {
+            CurrentChildView = new FugaDetailViewModel();
+        }
+
+        private void ExecuteShowTablaDeRegistroViewCommand(object obj)
+        {
+            CurrentChildView = new RegistroViewModel();
+        }
+
     }
 }

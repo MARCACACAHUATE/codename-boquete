@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="codename_boquete.View.RegistroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:codename_boquete.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="Gray">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button>Tabla de Registro</Button>
+            <Button>Fugas Reparadas</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock Text="Fecha Inicio"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Fecha de Termino"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Linea"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Turno"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Coil"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Soldadura"/>
+                    <ComboBox></ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Serie"/>
+                    <DataGridTextColumn Header="Coil"/>
+                    <DataGridTextColumn Header="Soldador"/>
+                    <DataGridTextColumn Header="Tipo"/>
+                    <DataGridTextColumn Header="Area"/>
+                    <DataGridTextColumn Header="Seccion"/>
+                    <DataGridTextColumn Header="Numero"/>
+                    <DataGridTextColumn Header="Fuga Falsa"/>
+                    <DataGridTextColumn Header="Linea"/>
+                    <DataGridTextColumn Header="Turno"/>
+                    <DataGridTextColumn Header="Operador"/>
+                    <DataGridTextColumn Header="Fecha"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+            
+    </Grid>
+</UserControl>
