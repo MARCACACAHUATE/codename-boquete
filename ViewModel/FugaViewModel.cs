@@ -36,10 +36,10 @@ namespace codename_boquete.ViewModel
 
             ListaRegistro.Add(new Registro
             {
-                Clientes = "Tu Pinche cola",
-                Adoran = "adoran",
-                Comer = "comer",
-                Aqui = "aquji"
+                Clientes = "",
+                Adoran = "",
+                Comer = "",
+                Aqui = ""
             });
 
         }
