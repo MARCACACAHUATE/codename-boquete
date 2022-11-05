@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:codename_boquete"
              StartupUri="/View/MainView.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="/Styles/ButtonStyles.xaml" />
     </Application.Resources>
 </Application>

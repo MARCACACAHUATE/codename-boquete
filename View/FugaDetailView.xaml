@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:codename_boquete.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="Gray">
+             >
     <Grid>
 
         <Grid.ColumnDefinitions>

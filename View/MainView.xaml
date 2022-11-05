@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:codename_boquete.View"
         xmlns:viewModel="clr-namespace:codename_boquete.ViewModel"
         mc:Ignorable="d"
-        Title="Formulario" Height="450" Width="800">
+        Title="Formulario" Height="450" Width="800" >
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -24,25 +24,87 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid Margin="10">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        
+        <!-- Seccion de Navegación -->
+        <Border Grid.Column="0" Grid.Row="1" >
+            <Border.Background>
+                <SolidColorBrush Color="#a8c6fa"></SolidColorBrush>
+            </Border.Background>
 
-        <StackPanel Grid.Column="0">
-            <Label>Menu Mamalon</Label>
-            <Button Command="{Binding ShowFormularioViewCommand}">Registro Nuevo</Button>
-            <Button Command="{Binding ShowFugaDetailViewCommand}">Boton de prueba</Button>
-            <Button Command="{Binding ShowTablaDeRegistroViewCommand}">Tabla de Registros</Button>
-        </StackPanel>
+            <StackPanel Margin="10">
+                <Button Command="{Binding ShowFormularioViewCommand}"
+                        Style="{StaticResource menuButton}"
+                        Content=""
+                        FontFamily="JetBrainsMono NF"
+                        FontSize="25"
+                        Foreground="#444444">
+                </Button>
+                <Button Command="{Binding ShowFugaDetailViewCommand}"
+                        Style="{StaticResource menuButton}"
+                        Content=""
+                        FontFamily="JetBrainsMono NF"
+                        FontSize="25"
+                        Foreground="#444444">
+                </Button>
+                <Button Command="{Binding ShowTablaDeRegistroViewCommand}"
+                        Style="{StaticResource menuButton}"
+                        Content=""
+                        FontFamily="JetBrainsMono NF"
+                        FontSize="25"
+                        Foreground="#444444">
+                </Button>
+            </StackPanel>
+            
+        </Border>
+        
 
-        <ContentControl Content="{Binding CurrentChildView}"
-                        Grid.Column="1"
-                        Margin="10"/>
+        <!-- Seccion Principal -->
+        <Border Grid.Column="1" Grid.Row="1" Margin="10">
+            <Border.Background>
+                <SolidColorBrush Color="#ffffff"/>
+            </Border.Background>
+            <ContentControl Content="{Binding CurrentChildView}" />
+        </Border>
+
+        <!-- Seccion DropMenu-->
+        <Border Grid.Column="0" Grid.Row="0">
+            <Border.Background>
+                <SolidColorBrush Color="#444444" />
+            </Border.Background>
+
+            <StackPanel>
+                <TextBlock Text="" 
+                           TextAlignment="Center" 
+                           Foreground="White"
+                           FontFamily="JetBrainsMono NF"
+                           FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Seccion Nombre-->
+        <Border Grid.Column="1" Grid.Row="0">
+            <Border.Background>
+                <SolidColorBrush Color="#ebebeb"/>
+            </Border.Background>
+
+            <StackPanel>
+                <TextBlock Text="@Codename Boquete" 
+                           Foreground="#444444" 
+                           FontFamily="JetBrainsMono NF"
+                           Margin="5"
+                           FontSize="13"/>
+            </StackPanel>
+        </Border>
 
     </Grid>
 </Window>
