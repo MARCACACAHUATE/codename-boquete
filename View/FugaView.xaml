@@ -92,8 +92,11 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
-            <Label>Imagen representativa a la verga compa</Label>
+        <StackPanel Grid.Column="1"
+                    Margin="30" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+            <Image Source="/Images/coil3x24.png" />
         </StackPanel>
 
     </Grid>

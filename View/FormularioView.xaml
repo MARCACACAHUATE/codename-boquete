@@ -175,8 +175,11 @@
         </StackPanel>
 
         <!-- Imagen-->
-        <StackPanel Grid.Column="1" Margin="30">
-            <Image Source="/Images/test_image.jpg" />
+        <StackPanel Grid.Column="1" 
+                    Margin="30" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+            <Image Source="/Images/coil3x24.png" />
         </StackPanel>
     </Grid>
 </UserControl>
