@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:codename_boquete.View"
+             xmlns:viewModel="clr-namespace:codename_boquete.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UserControl.DataContext>
+        <viewModel:RegistroViewModel />
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -66,20 +73,20 @@
                     <ComboBox></ComboBox>
                 </StackPanel>
             </StackPanel>
-            <DataGrid FontFamily="JetBrainsMono NF">
+            <DataGrid FontFamily="JetBrainsMono NF" IsReadOnly="True" ItemsSource="{Binding ListaReporteDeFugas}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Serie"/>
-                    <DataGridTextColumn Header="Coil"/>
-                    <DataGridTextColumn Header="Soldador"/>
-                    <DataGridTextColumn Header="Tipo"/>
-                    <DataGridTextColumn Header="Area"/>
-                    <DataGridTextColumn Header="Seccion"/>
-                    <DataGridTextColumn Header="Numero"/>
-                    <DataGridTextColumn Header="Fuga Falsa"/>
-                    <DataGridTextColumn Header="Linea"/>
-                    <DataGridTextColumn Header="Turno"/>
-                    <DataGridTextColumn Header="Operador"/>
-                    <DataGridTextColumn Header="Fecha"/>
+                    <DataGridTextColumn Header="Serie" Binding="{Binding NumSerie}" />
+                    <DataGridTextColumn Header="Coil" Binding="{Binding NombreCoil}"/>
+                    <DataGridTextColumn Header="Soldador" Binding="{Binding Soldador}"/>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
+                    <DataGridTextColumn Header="Area" Binding="{Binding Area}"/>
+                    <DataGridTextColumn Header="Seccion" Binding="{Binding Seccion}"/>
+                    <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
+                    <DataGridTextColumn Header="Fuga Falsa" Binding="{Binding FugaFalsa}"/>
+                    <DataGridTextColumn Header="Linea" Binding="{Binding Linea}"/>
+                    <DataGridTextColumn Header="Turno" Binding="{Binding Turno}"/>
+                    <DataGridTextColumn Header="Operador" Binding="{Binding Operador}"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
