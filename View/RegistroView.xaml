@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:codename_boquete.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="Gray">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -16,39 +15,58 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button>Tabla de Registro</Button>
-            <Button>Fugas Reparadas</Button>
-        </StackPanel>
+        <!-- Botones-->
+        <Border Grid.Row="0" >
+            <Border.Background>
+                <SolidColorBrush Color="#3d8af7" />
+            </Border.Background>
+            <StackPanel Orientation="Horizontal" >
+                <RadioButton Style="{StaticResource registroButton}"
+                             FontFamily="JetBrainsMono NF"
+                             Margin="5,0,5,0"
+                             IsChecked="True">Tabla de Registro</RadioButton>
+                <RadioButton Style="{StaticResource registroButton}" 
+                             FontFamily="JetBrainsMono NF"
+                             Margin="5,0,5,0">Fugas Reparadas</RadioButton>
+            </StackPanel>
+        </Border>
 
+        <!-- Seccion Registros -->
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
-                    <TextBlock Text="Fecha Inicio"/>
+                    <TextBlock Text="Fecha Inicio"
+                               FontFamily="JetBrainsMono NF"
+                               />
                     <ComboBox></ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Fecha de Termino"/>
+                    <TextBlock Text="Fecha de Termino"
+                               FontFamily="JetBrainsMono NF"/>
                     <ComboBox></ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Linea"/>
+                    <TextBlock Text="Linea"
+                               FontFamily="JetBrainsMono NF"/>
                     <ComboBox></ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Turno"/>
+                    <TextBlock Text="Turno"
+                               FontFamily="JetBrainsMono NF"/>
                     <ComboBox></ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Coil"/>
+                    <TextBlock Text="Coil"
+                               FontFamily="JetBrainsMono NF"/>
                     <ComboBox></ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Soldadura"/>
+                    <TextBlock Text="Soldadura"
+                               FontFamily="JetBrainsMono NF"/>
                     <ComboBox></ComboBox>
                 </StackPanel>
             </StackPanel>
-            <DataGrid>
+            <DataGrid FontFamily="JetBrainsMono NF">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Serie"/>
                     <DataGridTextColumn Header="Coil"/>

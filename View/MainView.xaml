@@ -69,7 +69,7 @@
         
 
         <!-- Seccion Principal -->
-        <Border Grid.Column="1" Grid.Row="1" Margin="10">
+        <Border Grid.Column="1" Grid.Row="1">
             <Border.Background>
                 <SolidColorBrush Color="#ffffff"/>
             </Border.Background>

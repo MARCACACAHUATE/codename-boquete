@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:codename_boquete.View"
              xmlns:viewModel="clr-namespace:codename_boquete.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Margin="10">
 
     <UserControl.DataContext>
         <viewModel:FormularioViewModel/>
@@ -27,104 +27,156 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <Label>Aqui va el pinche Formulario</Label>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Numero de Serie" />
-                <TextBox Width="100"
-                         Margin="10,0,0,0"/>
-            </StackPanel>
+        <!-- Formulario -->
+        <StackPanel>
+            <TextBlock FontFamily="JetBrainsMono NF"
+                       FontSize="20"
+                       Margin="0,10,0,10"
+                       >Registro Nuevo</TextBlock>
+
+            <Border CornerRadius="10"
+                    Margin="0,10,0,10"
+                    Height="300">
+                <Border.Background>
+                    <SolidColorBrush Color="#ebebeb"/>
+                </Border.Background>
+
+                    
+                <StackPanel Grid.Column="0" Margin="10">
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Numero de Serie" 
+                                   FontFamily="JetBrainsMono NF"
+                                   VerticalAlignment="Center"
+                                   />
+                        <TextBox Style="{StaticResource Textbox1}"
+                                 Margin="10,0,0,0"
+                                 />
+                    </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Nombre del Coil" />
-                <ComboBox Width="300">
-                    <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                    <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                    <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                    <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                    <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Nombre del Coil" 
+                                   FontFamily="JetBrainsMono NF"
+                                   VerticalAlignment="Center"/>
+                        <ComboBox Style="{DynamicResource ComboBoxStyle1}"  
+                                  FontFamily="JetBrainsMono NF"
+                                  Margin="30,0,0,0"
+                                  Width="150">
+                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Coil para Scrap" />
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton>
-                        <TextBlock Text="Si"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="No"/>
-                    </RadioButton>
-                </StackPanel>
-            </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Coil para Scrap" 
+                                   FontFamily="JetBrainsMono NF"
+                                   VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="Si"/>
+                            </RadioButton>
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="No"/>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Fuga Falsa" />
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton>
-                        <TextBlock Text="Si"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="No"/>
-                    </RadioButton>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Fuga Falsa" FontFamily="JetBrainsMono NF"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="Si" FontFamily="JetBrainsMono NF"/>
+                            </RadioButton>
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="No" FontFamily="JetBrainsMono NF"/>
+                            </RadioButton>
+                        </StackPanel>
+                        
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Linea" FontFamily="JetBrainsMono NF"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="1"/>
+                            </RadioButton >
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="2"/>
+                            </RadioButton>
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="3"/>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Turno" FontFamily="JetBrainsMono NF"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="1"/>
+                            </RadioButton>
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="2"/>
+                            </RadioButton>
+                            <RadioButton Margin="10,0,10,0">
+                                <TextBlock Text="3"/>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Retrabajador" FontFamily="JetBrainsMono NF"/>
+                        <ComboBox Width="150"
+                                  FontFamily="JetBrainsMono NF"
+                                  Style="{StaticResource ComboBoxStyle1}"
+                                  Margin="30,0,0,0"
+                                  >
+                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
+                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
+                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
+                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                    <Button Command="{Binding ShowFugaDetailViewCommand}"
+                            Style="{StaticResource accionButton}"
+                            FontFamily="JetBrainsMono NF"
+                            Foreground="#ffffff"
+                        Margin="0,5,0,5">
+                        Añadir Fuga
+                    </Button>
+
                 </StackPanel>
                 
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Linea" />
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton>
-                        <TextBlock Text="1"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="2"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="3"/>
-                    </RadioButton>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Turno" />
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton>
-                        <TextBlock Text="1"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="2"/>
-                    </RadioButton>
-                    <RadioButton>
-                        <TextBlock Text="3"/>
-                    </RadioButton>
-                </StackPanel>
-            </StackPanel>
-
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Retrabajador" />
-                <ComboBox Width="300">
-                    <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                    <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                    <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                    <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-
-
-            <Button Command="{Binding ShowFugaDetailViewCommand}"
-                >
-                Añadir Fuga
-            </Button>
-
+            </Border>
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
-            <Label>Imagen representativa</Label>
+        <!-- Imagen-->
+        <StackPanel Grid.Column="1" Margin="30">
+            <Image Source="/Images/test_image.jpg" />
         </StackPanel>
     </Grid>
 </UserControl>
