@@ -55,6 +55,7 @@
                                    />
                         <TextBox Style="{StaticResource Textbox1}"
                                  Margin="10,0,0,0"
+                                 Text="{Binding NumSerie}"
                                  />
                     </StackPanel>
 
@@ -68,12 +69,10 @@
                         <ComboBox Style="{DynamicResource ComboBoxStyle1}"  
                                   FontFamily="JetBrainsMono NF"
                                   Margin="30,0,0,0"
-                                  Width="150">
-                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
-                            <ComboBoxItem>Arriva las Chivas</ComboBoxItem>
+                                  Width="150"
+                                  ItemsSource="{Binding NombreCoil}"
+                                  SelectedItem="{Binding CoilSelect}"
+                                  >
                         </ComboBox>
                     </StackPanel>
 
@@ -85,11 +84,17 @@
                                    FontFamily="JetBrainsMono NF"
                                    VerticalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="Si"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         Content="Si"
+                                         Name="scrapTrue"
+                                         Command="{Binding CoilScrapViewCommand}"
+                                         CommandParameter="{Binding ElementName=scrapTrue, Path=Content}">
                             </RadioButton>
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="No"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         Content="No"
+                                         Name="scrapFalse"
+                                         Command="{Binding CoilScrapViewCommand}"
+                                         CommandParameter="{Binding ElementName=scrapFalse, Path=Content}">
                             </RadioButton>
                         </StackPanel>
                     </StackPanel>
@@ -98,12 +103,20 @@
                                 HorizontalAlignment="Center"
                                 Margin="0,5,0,5">
                         <TextBlock Text="Fuga Falsa" FontFamily="JetBrainsMono NF"/>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="Si" FontFamily="JetBrainsMono NF"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="Si"
+                                         Name="fugaTrue"
+                                         Command="{ Binding FugaFalsaViewCommand }"
+                                         CommandParameter="{Binding ElementName=fugaTrue, Path=Content}">
                             </RadioButton>
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="No" FontFamily="JetBrainsMono NF"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="No"
+                                         Name="fugaFalse"
+                                         Command="{ Binding FugaFalsaViewCommand }"
+                                         CommandParameter="{ Binding ElementName=fugaFalse, Path=Content }">
                             </RadioButton>
                         </StackPanel>
                         
@@ -114,14 +127,26 @@
                                 Margin="0,5,0,5">
                         <TextBlock Text="Linea" FontFamily="JetBrainsMono NF"/>
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="1"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="1"
+                                         Name="lineaUno"
+                                         Command="{ Binding LineaViewCommand }"
+                                         CommandParameter="{ Binding ElementName=lineaUno, Path=Content }">
                             </RadioButton >
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="2"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="2"
+                                         Name="lineaDos"
+                                         Command="{ Binding LineaViewCommand }"
+                                         CommandParameter="{ Binding ElementName=lineaDos, Path=Content}">
                             </RadioButton>
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="3"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="3"
+                                         Name="lineaTres"
+                                         Command="{ Binding LineaViewCommand }"
+                                         CommandParameter="{ Binding ElementName=lineaTres, Path=Content}">
                             </RadioButton>
                         </StackPanel>
                     </StackPanel>
@@ -131,14 +156,26 @@
                                 Margin="0,5,0,5">
                         <TextBlock Text="Turno" FontFamily="JetBrainsMono NF"/>
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="1"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="1"
+                                         Name="turnoUno"
+                                         Command="{ Binding TurnoViewCommand }"
+                                         CommandParameter="{ Binding ElementName=turnoUno, Path=Content}">
                             </RadioButton>
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="2"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="2"
+                                         Name="turnoDos"
+                                         Command="{ Binding TurnoViewCommand }"
+                                         CommandParameter="{ Binding ElementName=turnoDos, Path=Content}">
                             </RadioButton>
-                            <RadioButton Margin="10,0,10,0">
-                                <TextBlock Text="3"/>
+                            <RadioButton Margin="10,0,10,0"
+                                         FontFamily="JetBrainsMono NF"
+                                         Content="3"
+                                         Name="turnoTres"
+                                         Command="{ Binding TurnoViewCommand }"
+                                         CommandParameter="{ Binding ElementName=turnoTres, Path=Content}">
                             </RadioButton>
                         </StackPanel>
                     </StackPanel>
@@ -152,11 +189,9 @@
                                   FontFamily="JetBrainsMono NF"
                                   Style="{StaticResource ComboBoxStyle1}"
                                   Margin="30,0,0,0"
+                                  ItemsSource="{Binding Retrabajadores}"
+                                  SelectedItem="{Binding RetrabajadorSelect}"
                                   >
-                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
-                            <ComboBoxItem>Arriva las chvias</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 
