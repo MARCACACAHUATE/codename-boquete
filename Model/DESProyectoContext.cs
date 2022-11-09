@@ -16,8 +16,11 @@ namespace codename_boquete.Model
         {
         }
 
+        public virtual DbSet<CsrfDataNumber> CsrfDataNumbers { get; set; } = null!;
         public virtual DbSet<CsrfDato> CsrfDatos { get; set; } = null!;
         public virtual DbSet<CsrfReporteDeFuga> CsrfReporteDeFugas { get; set; } = null!;
+        public virtual DbSet<CsrfRetrabajadore> CsrfRetrabajadores { get; set; } = null!;
+        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +33,19 @@ namespace codename_boquete.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CsrfDataNumber>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("CSRF_DataNumber");
+
+                entity.Property(e => e.Cantidad).IsUnicode(false);
+
+                entity.Property(e => e.Color).IsUnicode(false);
+
+                entity.Property(e => e.Modelo).IsUnicode(false);
+            });
+
             modelBuilder.Entity<CsrfDato>(entity =>
             {
                 entity.HasNoKey();
@@ -154,6 +170,65 @@ namespace codename_boquete.Model
                 entity.Property(e => e.TipoExtra)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CsrfRetrabajadore>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("CSRF_Retrabajadores");
+
+                entity.Property(e => e.Induccion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nomina)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Puesto)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReparacionAb)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ReparacionAB");
+
+                entity.Property(e => e.ReparacionCamara)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SoldaduraManual)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.Property(e => e.Correo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("correo");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("username");
             });
 
             OnModelCreatingPartial(modelBuilder);
