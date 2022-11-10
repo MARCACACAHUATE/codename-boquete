@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Input;
 using codename_boquete.View;
 using codename_boquete.Model;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System.Security.Principal;
+using codename_boquete.Services;
+using codename_boquete.ViewModel;
 
 namespace codename_boquete.ViewModel
 {
     public class FormularioViewModel: ViewModelBase
     {
+        // TestObservable
+        public event PubSubEventHandler<object> AddRegistroHandler;
+
         // Fields
         private FugaView _fugaView;
         private string _numSerie;
@@ -130,6 +136,7 @@ namespace codename_boquete.ViewModel
                 onPropertyChanged(nameof(RetrabajadorSelect));
             }  
         }
+
         // Comandos
         public ICommand ShowFugaDetailViewCommand { get; }
         public ICommand CoilScrapViewCommand { get;  }
@@ -140,6 +147,9 @@ namespace codename_boquete.ViewModel
         // Constructor
         public FormularioViewModel()
         {
+            // Test
+            PubSub<object>.AddEvent("AddRegistro", AddRegistroHandler);
+
             ShowFugaDetailViewCommand = new ViewModelCommand(ExecuteShowFugaViewCommand);
             CoilScrapViewCommand = new ViewModelCommand(ExecuteCoilScrapViewCommand);
             FugaFalsaViewCommand = new ViewModelCommand(ExecuteFugaFalsaViewCommand);
@@ -153,15 +163,23 @@ namespace codename_boquete.ViewModel
         // Metodos
         public void ExecuteShowFugaViewCommand(object obj)
         {
+            // Test
+            //PubSub<object>.RegisterEvent("AddRegistro", FugaViewModel.AddRegistroHandler);
+
+            PubSub<object>.RaiseEvent("AddRegistro", this, new PubSubEventArgs<object>(CoilSelect));
+            //
+
+            //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(CoilSelect), null);
             FugaView = new FugaView();
             FugaView.ShowDialog();
-            System.Diagnostics.Debug.WriteLine("Numero series " + NumSerie);
-            System.Diagnostics.Debug.WriteLine("Coil para Scrap " + CoilParaScrap);
-            System.Diagnostics.Debug.WriteLine("Fuga " + FugaFalsa);
-            System.Diagnostics.Debug.WriteLine("Linea " + Linea);
-            System.Diagnostics.Debug.WriteLine("Turno " + Turno);
-            System.Diagnostics.Debug.WriteLine("retrabajador " + RetrabajadorSelect);
-            System.Diagnostics.Debug.WriteLine("nombre Coil " + CoilSelect);
+
+            //System.Diagnostics.Debug.WriteLine("Numero series " + NumSerie);
+            //System.Diagnostics.Debug.WriteLine("Coil para Scrap " + CoilParaScrap);
+            //System.Diagnostics.Debug.WriteLine("Fuga " + FugaFalsa);
+            //System.Diagnostics.Debug.WriteLine("Linea " + Linea);
+            //System.Diagnostics.Debug.WriteLine("Turno " + Turno);
+            //System.Diagnostics.Debug.WriteLine("retrabajador " + RetrabajadorSelect);
+            //System.Diagnostics.Debug.WriteLine("nombre Coil " + CoilSelect);
         }
 
         public void ExecuteCoilScrapViewCommand(object obj)
