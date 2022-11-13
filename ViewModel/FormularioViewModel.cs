@@ -163,13 +163,19 @@ namespace codename_boquete.ViewModel
         // Metodos
         public void ExecuteShowFugaViewCommand(object obj)
         {
-            // Test
-            //PubSub<object>.RegisterEvent("AddRegistro", FugaViewModel.AddRegistroHandler);
+            RegistroFuga registro = new RegistroFuga
+            {
+                NumSerie = NumSerie,
+                CoilParaScrap = CoilParaScrap,
+                FugaFalsa = FugaFalsa,
+                Linea = Linea,
+                Turno = Turno,
+                RetrabajadorSelect = RetrabajadorSelect,
+                NombreCoil = CoilSelect
+            };
 
-            PubSub<object>.RaiseEvent("AddRegistro", this, new PubSubEventArgs<object>(CoilSelect));
-            //
+            PubSub<object>.RaiseEvent("AddRegistro", this, new PubSubEventArgs<object>(registro));
 
-            //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(CoilSelect), null);
             FugaView = new FugaView();
             FugaView.ShowDialog();
 
