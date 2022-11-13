@@ -45,32 +45,38 @@
                     <TextBlock Text="Fecha Inicio"
                                FontFamily="JetBrainsMono NF"
                                />
-                    <ComboBox></ComboBox>
+                    <DatePicker SelectedDate="{Binding FechaInicio}"
+                                DisplayDate="2022-01-01"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Fecha de Termino"
                                FontFamily="JetBrainsMono NF"/>
-                    <ComboBox></ComboBox>
+                    <DatePicker SelectedDate="{Binding FechaTermino}"
+                                DisplayDate="2022-01-01"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Linea"
                                FontFamily="JetBrainsMono NF"/>
-                    <ComboBox></ComboBox>
+                    <ComboBox ItemsSource="{Binding ListLinea}"
+                              SelectedItem="{Binding Linea}"></ComboBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Turno"
                                FontFamily="JetBrainsMono NF"/>
-                    <ComboBox></ComboBox>
+                    <ComboBox ItemsSource="{Binding ListTurno}"
+                              SelectedItem="{Binding Turno}"></ComboBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Coil"
                                FontFamily="JetBrainsMono NF"/>
-                    <ComboBox></ComboBox>
+                    <ComboBox ItemsSource="{Binding ListCoil}"
+                              SelectedItem="{Binding Coil}"></ComboBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Soldadura"
                                FontFamily="JetBrainsMono NF"/>
-                    <ComboBox></ComboBox>
+                    <ComboBox ItemsSource="{Binding ListSoldadura}"
+                              SelectedItem="{Binding Soldadura}"></ComboBox>
                 </StackPanel>
             </StackPanel>
             <DataGrid FontFamily="JetBrainsMono NF" IsReadOnly="True" ItemsSource="{Binding ListaReporteDeFugas}" AutoGenerateColumns="False">
@@ -89,6 +95,11 @@
                     <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"/>
                 </DataGrid.Columns>
             </DataGrid>
+
+            <Button Style="{StaticResource accionButton}"
+                    Command="{Binding BusquedaConSPViewCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="10">Buscar</Button>
         </StackPanel>
             
     </Grid>
