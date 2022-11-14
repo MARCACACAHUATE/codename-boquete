@@ -11,6 +11,8 @@ using codename_boquete.Services;
 using codename_boquete.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Collections.ObjectModel;
 
 namespace codename_boquete.ViewModel
 {
@@ -22,7 +24,7 @@ namespace codename_boquete.ViewModel
         private string _seccion;
         private string _numero;
         private string _soldadorSelect;
-        private List<string> _soldador = new List<string>();
+        private ObservableCollection<string> _soldador = new ObservableCollection<string>();
         private string _tipo;
         private string _area;
         private string _comentarios;
@@ -31,9 +33,16 @@ namespace codename_boquete.ViewModel
         private List<string> _listSecciones;
         private List<string> _listNumeros;
         private List<CsrfDataNumber> _listDataNumber;
-        private List<DetallesFuga> _listDetallesFuga = new List<DetallesFuga>();
-        private List<string> _listTipos = new List<string>();
-        private List<string> _listAreas = new List<string>();
+        private ObservableCollection<DetallesFuga> _listDetallesFuga = new ObservableCollection<DetallesFuga>();
+        private List<string> _listTipos = new List<string>(){ "Header", "TXV", "Distribuidor", "Capilar", "RCD"};
+        private List<string> _listAreas = new List<string>(){ "MCHX 1", "LEA", "Velo", "Evap"};
+
+        private string _numeroSerie;
+        private string _coilScrap;
+        private bool _fugaFalsa;
+        private int _linea;
+        private int _turno;
+        private string _retrabajador;
 
         // Propiedades
         public string SoldadorSelect
@@ -45,7 +54,7 @@ namespace codename_boquete.ViewModel
                 onPropertyChanged(nameof(SoldadorSelect));
             }
         }
-        public List<DetallesFuga> ListDetallesFuga
+        public ObservableCollection<DetallesFuga> ListDetallesFuga
         {
             get => _listDetallesFuga;
             set
@@ -140,9 +149,10 @@ namespace codename_boquete.ViewModel
             {
                 _numero = value;
                 onPropertyChanged(nameof(Numero));
+                ExecuteEspecificacionFugaViewCommand(null);
             }
         }
-        public List<string> Soldador
+        public ObservableCollection<string> Soldador
         {
             get => _soldador;
             set
@@ -198,6 +208,62 @@ namespace codename_boquete.ViewModel
             }
         }
 
+
+        public string NumeroSerie 
+        { 
+            get => _numeroSerie; 
+            set
+            {
+                _numeroSerie = value;
+                onPropertyChanged(nameof(NumeroSerie));
+            }  
+        }
+        public string CoilScrap 
+        { 
+            get => _coilScrap; 
+            set
+            {
+                _coilScrap = value;
+                onPropertyChanged(nameof(CoilScrap));
+            }
+        }
+        public bool FugaFalsa 
+        { 
+            get => _fugaFalsa; 
+            set
+            {
+                _fugaFalsa = value;
+                onPropertyChanged(nameof(FugaFalsa));
+            }
+        }
+        public int Linea 
+        { 
+            get => _linea;
+            set
+            {
+                _linea = value;
+                onPropertyChanged(nameof(Linea));
+            }
+        }
+        public int Turno 
+        { 
+            get => _turno; 
+            set
+            {
+                _turno = value;
+                onPropertyChanged(nameof(Turno));
+            }
+        }
+        public string Retrabajador 
+        { 
+            get => _retrabajador; 
+            set
+            {
+                _retrabajador = value;
+                onPropertyChanged(nameof(Retrabajador));
+            }
+        }
+
         // Comandos 
         public ICommand AddRegistroNuevo { get; }
         public ICommand EspecificacionFugaViewCommand { get; }
@@ -250,6 +316,7 @@ namespace codename_boquete.ViewModel
         {
             SqlConnection sqlConn = null;
             SqlDataReader sqlDr = null;
+            Soldador = new ObservableCollection<string>();
 
             try
             {
@@ -257,7 +324,7 @@ namespace codename_boquete.ViewModel
                 sqlConn = new SqlConnection("Server=127.0.0.1;Database=DESProyecto;User=SA;Password=arribaLasChivas10;MultipleActiveResultSets=true;");
                 sqlConn.Open();
 
-                Debug.WriteLine("Test SP field -> " + Registro.NumSerie);
+                Debug.WriteLine("lista de soldadoes -> " + Registro.NumSerie);
 
                 // Crea un objeto commando con parametros para el sp
                 SqlCommand sqlCmd = new SqlCommand("dbo.spOut_CSRF_Soldadores", sqlConn);
@@ -333,7 +400,7 @@ namespace codename_boquete.ViewModel
                     sqlDr = sqlCmd.ExecuteReader();
                 }
 
-                ListDetallesFuga = new List<DetallesFuga>();
+                ListDetallesFuga = new ObservableCollection<DetallesFuga>();
 
             }
             catch (Exception e)
@@ -358,6 +425,13 @@ namespace codename_boquete.ViewModel
             System.Diagnostics.Debug.WriteLine("Nombre Coil " + Registro.NombreCoil);
             System.Diagnostics.Debug.WriteLine("Fuga " + Registro.FugaFalsa);
             System.Diagnostics.Debug.WriteLine("Linea " + Registro.Linea);
+
+            NumeroSerie = Registro.NumSerie;
+            NombreCoil = Registro.NombreCoil;
+            FugaFalsa = Registro.FugaFalsa;
+            Linea = Registro.Linea;
+            Turno = Registro.Turno;
+            Retrabajador = Registro.RetrabajadorSelect;
             //System.Diagnostics.Debug.WriteLine("Turno " + Turno);
             //System.Diagnostics.Debug.WriteLine("retrabajador " + RetrabajadorSelect);
             //System.Diagnostics.Debug.WriteLine("nombre Coil " + CoilSelect);

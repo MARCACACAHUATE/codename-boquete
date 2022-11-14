@@ -127,6 +127,15 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="{Binding NumeroSerie}" /> 
+                    <TextBlock Text="{Binding NombreCoil}" /> 
+                    <TextBlock Text="{Binding CoilScrap}" /> 
+                    <TextBlock Text="{Binding FugaFalsa}" /> 
+                    <TextBlock Text="{Binding Linea}" /> 
+                    <TextBlock Text="{Binding CoilScrap}" /> 
+                       
+                </StackPanel>
 
                 <StackPanel Margin="0,15,0,0" 
                             Orientation="Horizontal" 

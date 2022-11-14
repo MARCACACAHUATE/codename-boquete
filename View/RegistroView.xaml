@@ -79,7 +79,9 @@
                               SelectedItem="{Binding Soldadura}"></ComboBox>
                 </StackPanel>
             </StackPanel>
-            <DataGrid FontFamily="JetBrainsMono NF" IsReadOnly="True" ItemsSource="{Binding ListaReporteDeFugas}" AutoGenerateColumns="False">
+            <DataGrid FontFamily="JetBrainsMono NF" IsReadOnly="True" ItemsSource="{Binding ListaReporteDeFugas}" 
+                      AutoGenerateColumns="False"
+                      MaxHeight="250">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Serie" Binding="{Binding NumSerie}" />
                     <DataGridTextColumn Header="Coil" Binding="{Binding NombreCoil}"/>
