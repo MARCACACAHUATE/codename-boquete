@@ -49,13 +49,6 @@
                         FontSize="25"
                         Foreground="#444444">
                 </Button>
-                <Button Command="{Binding ShowFugaDetailViewCommand}"
-                        Style="{StaticResource menuButton}"
-                        Content=""
-                        FontFamily="JetBrainsMono NF"
-                        FontSize="25"
-                        Foreground="#444444">
-                </Button>
                 <Button Command="{Binding ShowTablaDeRegistroViewCommand}"
                         Style="{StaticResource menuButton}"
                         Content=""
