@@ -176,6 +176,13 @@ namespace codename_boquete.ViewModel
 
             PubSub<object>.RaiseEvent("AddRegistro", this, new PubSubEventArgs<object>(registro));
 
+            //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(registro), null);
+
+            // Prueba de threads
+            LocalDataStoreSlot slot = Thread.GetNamedDataSlot("registro");
+            Thread.SetData(slot, registro);
+            //
+
             FugaView = new FugaView();
             FugaView.ShowDialog();
 

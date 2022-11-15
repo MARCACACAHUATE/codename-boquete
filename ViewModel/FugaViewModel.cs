@@ -38,7 +38,7 @@ namespace codename_boquete.ViewModel
         private List<string> _listAreas = new List<string>(){ "MCHX 1", "LEA", "Velo", "Evap"};
 
         private string _numeroSerie;
-        private string _coilScrap;
+        private bool _coilScrap;
         private bool _fugaFalsa;
         private int _linea;
         private int _turno;
@@ -218,7 +218,7 @@ namespace codename_boquete.ViewModel
                 onPropertyChanged(nameof(NumeroSerie));
             }  
         }
-        public string CoilScrap 
+        public bool CoilScrap 
         { 
             get => _coilScrap; 
             set
@@ -274,11 +274,20 @@ namespace codename_boquete.ViewModel
         public FugaViewModel()
         {
             EspecificacionFuga = "Especificación de Fuga";
-            PubSub<object>.RegisterEvent("AddRegistro", AddRegistroHandler);
+            //PubSub<object>.RegisterEvent("AddRegistro", AddRegistroHandler);
 
             AddRegistroNuevo = new ViewModelCommand(ExecuteAddRegistroNuevo);
             EspecificacionFugaViewCommand = new ViewModelCommand(ExecuteEspecificacionFugaViewCommand);
             GuardarRegistroFugaViewCommand = new ViewModelCommand(ExecuteGuardarRegistrosFugaViewCommand);
+
+            LocalDataStoreSlot slot = Thread.GetNamedDataSlot("registro");
+            Registro = (RegistroFuga)Thread.GetData(slot);
+            NumeroSerie = Registro.NumSerie;
+            CoilScrap = Registro.CoilParaScrap;
+            FugaFalsa = Registro.FugaFalsa;
+            Linea = Registro.Linea;
+            Turno = Registro.Turno;
+            Retrabajador = Registro.RetrabajadorSelect;
 
             ExecuteFugaDataNumber(null);
         }
@@ -287,7 +296,6 @@ namespace codename_boquete.ViewModel
         // Metodos
         public void ExecuteAddRegistroNuevo(object obj)
         {
-            Debug.WriteLine("Boton Añadir a la verga compa");
             ListDetallesFuga.Add(new DetallesFuga
             {
                 Seccion = Seccion,
@@ -372,8 +380,6 @@ namespace codename_boquete.ViewModel
 
                 // iteramos la lista de detalles
                 foreach (DetallesFuga detalle in ListDetallesFuga) {
-                    Debug.WriteLine("seccion de la chingadera " + detalle.Seccion);
-                    Debug.WriteLine("numero de la chingadera " + detalle.Numero);
 
                     // Crea un objeto commando con parametros para el sp
                     SqlCommand sqlCmd = new SqlCommand("spIn_CSRF_RegistroDeFugas", sqlConn);
@@ -421,20 +427,12 @@ namespace codename_boquete.ViewModel
         {
             Registro = (RegistroFuga)arg.Item;
 
-            System.Diagnostics.Debug.WriteLine("Numero series " + Registro.NumSerie);
-            System.Diagnostics.Debug.WriteLine("Nombre Coil " + Registro.NombreCoil);
-            System.Diagnostics.Debug.WriteLine("Fuga " + Registro.FugaFalsa);
-            System.Diagnostics.Debug.WriteLine("Linea " + Registro.Linea);
-
             NumeroSerie = Registro.NumSerie;
             NombreCoil = Registro.NombreCoil;
             FugaFalsa = Registro.FugaFalsa;
             Linea = Registro.Linea;
             Turno = Registro.Turno;
             Retrabajador = Registro.RetrabajadorSelect;
-            //System.Diagnostics.Debug.WriteLine("Turno " + Turno);
-            //System.Diagnostics.Debug.WriteLine("retrabajador " + RetrabajadorSelect);
-            //System.Diagnostics.Debug.WriteLine("nombre Coil " + CoilSelect);
         }
     }
 }
