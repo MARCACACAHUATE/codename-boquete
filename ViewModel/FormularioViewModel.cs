@@ -218,7 +218,7 @@ namespace codename_boquete.ViewModel
 
         public void ExecuteListCoilsNames(object obj)
         {
-            using(FimeContext db = new FimeContext())
+            using(DESProyectoContext db = new DESProyectoContext())
             {
                 List<string> listModelos = (from data in db.CsrfDataNumbers 
                                             select data.Modelo).ToList();

@@ -137,9 +137,9 @@ namespace codename_boquete.ViewModel
             {
                 _seccion = value;
                 onPropertyChanged(nameof(Seccion));
-                //TotalNumeros = (from data in ListDataNumber
-                  //              where data.Color == value
-                   //             select data.Cantidad).ToList()[0];
+                TotalNumeros = (from data in ListDataNumber
+                                where data.Color == value
+                                select data.Cantidad).ToList()[0];
             }
         }
         public string Numero
@@ -309,7 +309,7 @@ namespace codename_boquete.ViewModel
 
         public void ExecuteFugaDataNumber(object obj)
         {
-            using (FimeContext db = new FimeContext())
+            using (DESProyectoContext db = new DESProyectoContext())
             {
                 ListDataNumber = (from data in db.CsrfDataNumbers
                                              select data).ToList();

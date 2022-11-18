@@ -14,9 +14,9 @@ namespace codename_boquete.Model
         public string? Soldador { get; set; }
         public string? CoilRechazado { get; set; }
         public string? FugaFalsa { get; set; }
-        public string? Fecha { get; set; }
-        public long? Linea { get; set; }
-        public long? Turno { get; set; }
+        public DateTime? Fecha { get; set; }
+        public int? Linea { get; set; }
+        public int? Turno { get; set; }
         public string? Operador { get; set; }
         public string? Comentarios { get; set; }
         public string? PiezaRetrabajada { get; set; }
