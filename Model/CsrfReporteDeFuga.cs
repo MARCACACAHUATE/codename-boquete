@@ -5,6 +5,7 @@ namespace codename_boquete.Model
 {
     public partial class CsrfReporteDeFuga
     {
+        public long Id { get; set; }
         public string? NumSerie { get; set; }
         public string? NombreCoil { get; set; }
         public string? Seccion { get; set; }

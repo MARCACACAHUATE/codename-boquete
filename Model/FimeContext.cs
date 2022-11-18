@@ -25,8 +25,8 @@ namespace codename_boquete.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlite("DataSource=C:\\Users\\marca\\Dev\\codename-boquete\\Fime.db");
+                string startupPath = Environment.CurrentDirectory;
+                optionsBuilder.UseSqlite($"DataSource={startupPath}\\Fime.db");
             }
         }
 
@@ -50,8 +50,6 @@ namespace codename_boquete.Model
 
             modelBuilder.Entity<CsrfReporteDeFuga>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("CSRF_ReporteDeFugas");
 
                 entity.Property(e => e.CostXunit).HasColumnName("CostXUnit");

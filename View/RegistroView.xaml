@@ -54,25 +54,25 @@
                     <DatePicker SelectedDate="{Binding FechaTermino}"
                                 DisplayDate="2022-01-01"/>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Visibility="Hidden">
                     <TextBlock Text="Linea"
                                FontFamily="JetBrainsMono NF"/>
                     <ComboBox ItemsSource="{Binding ListLinea}"
                               SelectedItem="{Binding Linea}"></ComboBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Visibility="Hidden">
                     <TextBlock Text="Turno"
                                FontFamily="JetBrainsMono NF"/>
                     <ComboBox ItemsSource="{Binding ListTurno}"
                               SelectedItem="{Binding Turno}"></ComboBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Visibility="Hidden">
                     <TextBlock Text="Coil"
                                FontFamily="JetBrainsMono NF"/>
                     <ComboBox ItemsSource="{Binding ListCoil}"
                               SelectedItem="{Binding Coil}"></ComboBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Visibility="Hidden">
                     <TextBlock Text="Soldadura"
                                FontFamily="JetBrainsMono NF"/>
                     <ComboBox ItemsSource="{Binding ListSoldadura}"

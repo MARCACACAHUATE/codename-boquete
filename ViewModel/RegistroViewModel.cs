@@ -158,62 +158,17 @@ namespace codename_boquete.ViewModel
 
         public void ExecuteBusquedaConSPViewCommand(object obj)
         {
-            SqlConnection sqlConn = null;
-            SqlDataReader sqlDr = null;
+            // Stored Procedure -> spOut_CSRF_FilterDataGrid
+            // Return Lista de ReportesFuga 
             ListaReporteDeFugas = new List<CsrfReporteDeFuga>();
 
-            try
+            using(FimeContext db = new FimeContext())
             {
-                // Abre la conexion a la DB
-                sqlConn = new SqlConnection("Server=127.0.0.1;Database=DESProyecto;User=SA;Password=arribaLasChivas10;MultipleActiveResultSets=true;");
-                sqlConn.Open();
 
-                // Crea un objeto commando con parametros para el sp
-                SqlCommand sqlCmd = new SqlCommand("dbo.spOut_CSRF_FilterDataGrid", sqlConn);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@SPTurno", SqlDbType.NVarChar).Value = Turno;
-                sqlCmd.Parameters.AddWithValue("@SPInfechaInicio", SqlDbType.NVarChar).Value = FechaInicio;
-                sqlCmd.Parameters.AddWithValue("@SPInfechaFinal", SqlDbType.NVarChar).Value = FechaTermino;
-                sqlCmd.Parameters.AddWithValue("@SPLinea", SqlDbType.NVarChar).Value = Linea;
-                sqlCmd.Parameters.AddWithValue("@SPCoil", SqlDbType.NVarChar).Value = Coil;
-                sqlCmd.Parameters.AddWithValue("@SPSoldadura", SqlDbType.NVarChar).Value = Soldadura;
+                ListaReporteDeFugas = db.CsrfReporteDeFugas.AsEnumerable().Where(data => Convert.ToDateTime(data.Fecha) >= FechaInicio && Convert.ToDateTime(data.Fecha) <= FechaTermino).ToList();
 
-                // Ejecutar el commad y pasar la data al reader
-                sqlDr = sqlCmd.ExecuteReader();
-
-                // Iterar en el reader y printear la data 
-                while (sqlDr.Read())
-                {
-                    ListaReporteDeFugas.Add(new CsrfReporteDeFuga
-                    {
-                        NumSerie = (string)sqlDr["NumSerie"],
-                        NombreCoil = (string)sqlDr["NombreCoil"],
-                        Soldador = (string)sqlDr["Soldador"],
-                        Tipo = (string)sqlDr["Tipo"],
-                        Area = (string)sqlDr["Area"],
-                        Seccion = (string)sqlDr["Seccion"],
-                        Numero = (string)sqlDr["Numero"],
-                        PiezaRetrabajada = (string)sqlDr["PiezaRetrabajada"],
-                        FugaFalsa = (string)sqlDr["FugaFalsa"],
-                        Linea = (int)sqlDr["Linea"],
-                        Turno = (int)sqlDr["Turno"],
-                        Operador = (string)sqlDr["Operador"],
-                        Fecha = (string)sqlDr["Fecha"],
-                        TipoExtra = (string)sqlDr["TipoExtra"]
-                    });
-                }
             }
-            catch (Exception e)
-            {
-                Debug.WriteLine("La Ejecución del Store Procedure fallo");
-                Debug.WriteLine(e.Message);
-            }
-            finally 
-            {
-                if(sqlConn != null) sqlConn.Close();
 
-                if(sqlDr != null) sqlDr.Close();
-            }
 
         }
     }

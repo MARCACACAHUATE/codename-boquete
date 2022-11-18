@@ -24,7 +24,7 @@ namespace codename_boquete.ViewModel
         private string _seccion;
         private string _numero;
         private string _soldadorSelect;
-        private ObservableCollection<string> _soldador = new ObservableCollection<string>();
+        private ObservableCollection<string> _soldador = new ObservableCollection<string>() { "AutoBrazer", "Jesus Enrique", "Gustavo Corpus Nuñez", "Francisco Javier Beltran", "Victor Manuel Rangel Esparza" };
         private string _tipo;
         private string _area;
         private string _comentarios;
@@ -137,9 +137,9 @@ namespace codename_boquete.ViewModel
             {
                 _seccion = value;
                 onPropertyChanged(nameof(Seccion));
-                //TotalNumeros = (from data in ListDataNumber
-                  //              where data.Color == value
-                   //             select data.Cantidad).ToList()[0];
+                TotalNumeros = (from data in ListDataNumber
+                                where data.Color == value
+                                select data.Cantidad).ToList()[0];
             }
         }
         public string Numero
@@ -274,6 +274,7 @@ namespace codename_boquete.ViewModel
         public FugaViewModel()
         {
             EspecificacionFuga = "Especificación de Fuga";
+            EspecificacionFuga = "Fuga Manual";
             //PubSub<object>.RegisterEvent("AddRegistro", AddRegistroHandler);
 
             AddRegistroNuevo = new ViewModelCommand(ExecuteAddRegistroNuevo);
@@ -322,104 +323,51 @@ namespace codename_boquete.ViewModel
 
         public void ExecuteEspecificacionFugaViewCommand(object obj)
         {
-            SqlConnection sqlConn = null;
-            SqlDataReader sqlDr = null;
-            Soldador = new ObservableCollection<string>();
-
-            try
+            // Stored Procedure -> spOut_CSRF_Soldadores
+            // Returna 
+            //        Soldador.Add((string)sqlDr["Soldador"]);
+            //        EspecificacionFuga = (string)sqlDr["TipoDeFuga"];
+            using(FimeContext db = new FimeContext())
             {
-                // Abre la conexion a la DB
-                sqlConn = new SqlConnection("Server=127.0.0.1;Database=DESProyecto;User=SA;Password=arribaLasChivas10;MultipleActiveResultSets=true;");
-                sqlConn.Open();
 
-                Debug.WriteLine("lista de soldadoes -> " + Registro.NumSerie);
-
-                // Crea un objeto commando con parametros para el sp
-                SqlCommand sqlCmd = new SqlCommand("dbo.spOut_CSRF_Soldadores", sqlConn);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@SPNombreCoil", SqlDbType.NVarChar).Value = "A coil 3x24 Cyclone";
-                sqlCmd.Parameters.AddWithValue("@SPSeccion", SqlDbType.NVarChar).Value = Seccion;
-                sqlCmd.Parameters.AddWithValue("@SPNumero", SqlDbType.Int).Value = Numero;
-
-                // Ejecutar el commad y pasar la data al reader
-                sqlDr = sqlCmd.ExecuteReader();
-
-                // Iterar en el reader y printear la data 
-                while (sqlDr.Read())
-                {
-                    Soldador.Add((string)sqlDr["Soldador"]);
-                    EspecificacionFuga = (string)sqlDr["TipoDeFuga"];
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("La Ejecución del Store Procedure fallo");
-                Debug.WriteLine(e.Message);
-            }
-            finally 
-            {
-                if(sqlConn != null) sqlConn.Close();
-
-                if(sqlDr != null) sqlDr.Close();
             }
 
         }
 
         public void ExecuteGuardarRegistrosFugaViewCommand(object obj)
         {
-
-            SqlConnection sqlConn = null;
-            SqlDataReader sqlDr = null;
-
-            try
+            // Stored Procedure -> spIn_CSRF_RegistroDeFugas
+            // Return void
+            using (FimeContext db = new FimeContext())
             {
-                // Abre la conexion a la DB
-                sqlConn = new SqlConnection("Server=127.0.0.1;Database=DESProyecto;User=SA;Password=arribaLasChivas10;MultipleActiveResultSets=true;");
-                sqlConn.Open();
+                foreach (DetallesFuga detalle in ListDetallesFuga)
+                {
+                    db.CsrfReporteDeFugas.Add(new CsrfReporteDeFuga{
+                        NumSerie = Registro.NumSerie != null ? Registro.NumSerie : "null",
+                        Tipo = detalle.Tipo != null ? detalle.Tipo : "null",
+                        Area = detalle.Area != null ? detalle.Area : "null",
+                        Soldador = detalle.Soldador != null ? detalle.Soldador : "null",
+                        Seccion = detalle.Seccion != null ? detalle.Seccion : "null",
+                        Numero = detalle.Numero != null ? detalle.Numero : "null",
+                        NombreCoil = Registro.NombreCoil != null ? Registro.NombreCoil : "null",
+                        CoilRechazado = "null",
+                        FugaFalsa = Registro.FugaFalsa.ToString(),
+                        Fecha = DateTime.Today.ToString(),
+                        Linea = Registro.Linea,
+                        Turno = Registro.Turno,
+                        Operador = "null",
+                        Comentarios = detalle.Comentarios != null ? detalle.Comentarios : "null",
+                        PiezaRetrabajada = Registro.RetrabajadorSelect != null ? Registro.RetrabajadorSelect : "null",
+                        TipoExtra = "null",
+                        CostXunit = "null",
+                    });
 
-
-                // iteramos la lista de detalles
-                foreach (DetallesFuga detalle in ListDetallesFuga) {
-
-                    // Crea un objeto commando con parametros para el sp
-                    SqlCommand sqlCmd = new SqlCommand("spIn_CSRF_RegistroDeFugas", sqlConn);
-                    sqlCmd.CommandType = CommandType.StoredProcedure;
-
-                    sqlCmd.Parameters.AddWithValue("@SPNumSerie", SqlDbType.NVarChar).Value = Registro.NumSerie != null ? Registro.NumSerie : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPTipo", SqlDbType.NVarChar).Value = detalle.Tipo != null ? detalle.Tipo : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPArea", SqlDbType.NVarChar).Value = detalle.Area != null ? detalle.Area : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPSoldador", SqlDbType.NVarChar).Value = detalle.Soldador != null ? detalle.Soldador : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPSeccion", SqlDbType.NVarChar).Value = detalle.Seccion != null ? detalle.Seccion : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPNumero", SqlDbType.NVarChar).Value = detalle.Numero != null ? detalle.Numero : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPNombreCoil", SqlDbType.NVarChar).Value = Registro.NombreCoil != null ? Registro.NombreCoil : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPCoilRechazado", SqlDbType.NVarChar).Value = "null";
-                    sqlCmd.Parameters.AddWithValue("@SPFugaFalsa", SqlDbType.NVarChar).Value = Registro.FugaFalsa;
-                    sqlCmd.Parameters.AddWithValue("@SPFecha", SqlDbType.DateTime).Value = DateTime.Today;
-                    sqlCmd.Parameters.AddWithValue("@SPLinea", SqlDbType.Int).Value = Registro.Linea;
-                    sqlCmd.Parameters.AddWithValue("@SPTurno", SqlDbType.Int).Value = Registro.Turno;
-                    sqlCmd.Parameters.AddWithValue("@SPOperador", SqlDbType.NVarChar).Value = "null";
-                    sqlCmd.Parameters.AddWithValue("@SPComentarios", SqlDbType.NVarChar).Value = detalle.Comentarios != null ? detalle.Comentarios : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPPzaRetrabajada", SqlDbType.NVarChar).Value = Registro.RetrabajadorSelect != null ? Registro.RetrabajadorSelect : "null";
-                    sqlCmd.Parameters.AddWithValue("@SPTipoExtra", SqlDbType.NVarChar).Value = "null";
-                    sqlCmd.Parameters.AddWithValue("@CostXUnit", SqlDbType.NVarChar).Value = "null";
-
-                    sqlDr = sqlCmd.ExecuteReader();
                 }
 
+                db.SaveChanges();
                 ListDetallesFuga = new ObservableCollection<DetallesFuga>();
+            }
 
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("La Ejecución del Store Procedure fallo");
-                Debug.WriteLine(e.Message);
-            }
-            finally 
-            {
-                if(sqlConn != null) sqlConn.Close();
-
-                if(sqlDr != null) sqlDr.Close();
-            }
         }
 
         // Method Handler 
