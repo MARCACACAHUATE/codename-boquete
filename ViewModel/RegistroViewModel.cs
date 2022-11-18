@@ -148,7 +148,7 @@ namespace codename_boquete.ViewModel
         // Metodos
         private void ExecuteListaRegistroViewCommand(object obj)
         {
-            using (Model.DESProyectoContext db = new Model.DESProyectoContext())
+            using (FimeContext db = new FimeContext())
             {
                 List<CsrfReporteDeFuga> lista = (from d in db.CsrfReporteDeFugas
                                                  select d).ToList();
@@ -198,7 +198,7 @@ namespace codename_boquete.ViewModel
                         Linea = (int)sqlDr["Linea"],
                         Turno = (int)sqlDr["Turno"],
                         Operador = (string)sqlDr["Operador"],
-                        Fecha = (DateTime)sqlDr["Fecha"],
+                        Fecha = (string)sqlDr["Fecha"],
                         TipoExtra = (string)sqlDr["TipoExtra"]
                     });
                 }
