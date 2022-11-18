@@ -7,11 +7,11 @@ namespace codename_boquete.Model
     {
         public string? NombreCoil { get; set; }
         public string? Seccion { get; set; }
-        public int? Numero { get; set; }
+        public long? Numero { get; set; }
         public string? Soldadores { get; set; }
         public string? Retrabajadores { get; set; }
         public string? Proveedores { get; set; }
-        public string? Area { get; set; }
+        public double? Area { get; set; }
         public string? Tipo { get; set; }
         public string? OtraCausaDeFuga { get; set; }
         public string? OtroTipoDeFuga { get; set; }
